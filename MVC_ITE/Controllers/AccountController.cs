@@ -20,6 +20,7 @@ namespace MVC_ITE.Controllers
 
         public AccountController()
         {
+
         }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
