@@ -12,6 +12,9 @@ namespace Model
         /// 用户Id 
         /// </summary>
         public int Id { get; set; }
+        /// <summary>
+        /// 用户账号
+        /// </summary>
         public string UserAccount { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
