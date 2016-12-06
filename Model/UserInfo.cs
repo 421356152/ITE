@@ -8,6 +8,9 @@ namespace Model
 {
     public class UserInfo
     {
+        /// <summary>
+        /// 用户Id
+        /// </summary>
         public int Id { get; set; }
         public string UserAccount { get; set; }
         public string UserName { get; set; }
