@@ -15,7 +15,7 @@ namespace MVC_ITE.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.gf";
+            ViewBag.Message = "Your application description page.gf  ";
 
             return View();
         }
