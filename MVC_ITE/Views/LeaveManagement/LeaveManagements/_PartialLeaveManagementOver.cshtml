@@ -1,0 +1,35 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using Model
+@model  IPagedList<Model.ViewLeaveManagement>
+
+<h2>已审批的请假单</h2>
+<input type="button" value="销假\全选" class="btn btn-info" />
+
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <td><input type="checkbox" value="全选" />全选</td>
+        <td>请假单号</td>
+        <td>请假人</td>
+        <td>所在班级</td>
+        <td>请假时间</td>
+        <td>请假天数</td>
+        <td>请假状态</td>
+        <td>请假类型</td>
+        <td>操作</td>
+    </tr>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td><input type="checkbox" /></td>
+            <td>@i.LeaveNo</td>
+            <td>@i.UserAccount</td>
+            <td>@i.ClassName</td>
+            <td>@i.StartDateTime-@i.EndDateTime</td>
+            <td>@i.LeaveDays</td>
+            <td>@i.CodeDescription</td>
+            <td>@i.LeaveCategory</td>
+            <td><input type="button" value="销假" class="btn btn-info" /></td>
+        </tr>
+    }
+</table>
+

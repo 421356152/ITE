@@ -392,6 +392,10 @@
     <Content Include="Views\Shared\_LayoutMain.cshtml" />
     <Content Include="Views\LeaveManagement\LeaveManagement.cshtml" />
     <Content Include="Views\LeaveEdit\Index.cshtml" />
+    <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeaveManagement.cshtml" />
+    <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeavePage.cshtml" />
+    <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeaveManagementOver.cshtml" />
+    <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeavePageOver.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
