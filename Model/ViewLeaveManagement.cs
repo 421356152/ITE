@@ -64,7 +64,7 @@ namespace Model
         /// <summary>
         /// 角色
         /// </summary>
-        public string role{ get; set; }
+        public string Role{ get; set; }
         /// <summary>
         /// 请假单状态
         /// </summary>

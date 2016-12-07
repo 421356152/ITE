@@ -55,7 +55,7 @@ namespace MVC_ITE.Controllers
             {
                 return Json("成功");
             }
-            else { return Json("失败"); }
+            else { return Json("失败");}
         }
     }
 }
