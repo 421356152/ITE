@@ -16,14 +16,14 @@ namespace MVC_ITE.Controllers
         /// 显示主页信息
         /// </summary>
         /// <returns></returns>
-
+        ViewLeaveManagementService viewleavelist = new ViewLeaveManagementService();
         public static int num=1;
         public ActionResult LeaveManagement(int id = 1,int mm=1)
         {
-            ViewLeaveManagementService viewleavelist = new ViewLeaveManagementService();
+            
             int pageSize = 2;
             //获取已审批的请假单数据
-            var overList = viewleavelist.OverViewLeaveList(mm, pageSize);
+            var overList = viewleavelist.OverViewLeaveList(mm, pageSize,1);
             //获取未审批的请假单数据
             //var list = viewleavelist.ViewLeaveList();
             ViewData["overList"] = overList;
@@ -35,13 +35,13 @@ namespace MVC_ITE.Controllers
                 if (id == num)
                 {
                     //加载用户列表分部视图
-                    return PartialView("LeaveManagements/_PartialLeavePageOver", viewleavelist.OverViewLeaveList(mm, pageSize));
+                    return PartialView("LeaveManagements/_PartialLeavePageOver", viewleavelist.OverViewLeaveList(mm, pageSize,1));
                     
                 }
-                else { num = id; return PartialView("LeaveManagements/_PartialLeavePage", viewleavelist.ViewLeaveList(id, pageSize));  }
+                else { num = id; return PartialView("LeaveManagements/_PartialLeavePage", viewleavelist.ViewLeaveList(id, pageSize,1));  }
             }
             //将数据返回到前台
-            return View(viewleavelist.ViewLeaveList(id, pageSize));
+            return View(viewleavelist.ViewLeaveList(id, pageSize,1));
         }
         
         /// <summary>
@@ -50,7 +50,7 @@ namespace MVC_ITE.Controllers
         /// <returns></returns>
         public JsonResult Rescind(int id)
         {
-            bool result = true;
+            bool result = viewleavelist.LeaveDel(id);
             if (result)
             {
                 return Json("成功");
