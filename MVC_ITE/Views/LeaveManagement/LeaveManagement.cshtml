@@ -1,61 +1,19 @@
-﻿@using Model
-
+﻿@using Webdiyer.WebControls.Mvc;
+@using Model
+@model  IPagedList<Model.ViewLeaveManagement>
 @{
     ViewBag.Title = "LeaveManagement";
     Layout = "~/Views/Shared/_LayoutMain.cshtml";
 }
 
-<input type="button" value="我要请假" class="btn btn-info"/>
+<div id="tableDiv"> 
+    @{Html.RenderPartial("LeaveManagements/_PartialLeavePage", Model);}
+</div>
 
-<h2>未审批的请假单</h2>
-<table class="table table-hover table-striped table-bordered">
-    <tr>
-        <td>请假单号</td>
-        <td>请假人</td>
-        @*<td>班级</td>
-            <td>请假原因</td>
-            <td>请假时间</td>
-            <td>请假天数</td>
-            <td>请假状态</td>*@
-    </tr>
-    @foreach (var i in ViewData["list"] as List<UserInfo>)
-    {
-        <tr>
-            <td>@i.Id</td>
-            @*<td>@i.LeaveNo</td>
-                <td>@i.UserName</td>
-                <td>@i.ClassName</td>
-                <td>@i.LeaveCause</td>
-                <td>@i.StartDateTime-@i.EndDateTime</td>
-                <td>@i.</td>
-                <td>@i.LeaveStatus</td>*@
-        </tr>
-    }
-</table>
 <hr />
-<h2>已审批的请假单</h2>
-<table class="table table-hover table-striped table-bordered">
-    <tr>
-        <td>请假单号</td>
-        <td>请假人</td>
-        @*<td>班级</td>
-            <td>请假原因</td>
-            <td>请假时间</td>
-            <td>请假天数</td>
-            <td>请假状态</td>*@
-    </tr>
-    @foreach (var i in ViewData["list"] as List<UserInfo>)
-    {
-        <tr>
-            <td>@i.Id</td>
-            <td>@i.UserName</td>
-            @*<td>@i.LeaveNo</td>
-                <td>@i.UserName</td>
-                <td>@i.ClassName</td>
-                <td>@i.LeaveCause</td>
-                <td>@i.StartDateTime-@i.EndDateTime</td>
-                <td>@i.</td>
-                <td>@i.LeaveStatus</td>*@
-        </tr>
-    }
-</table>
+@{Html.RenderPartial("LeaveManagements/_PartialLeaveManagementOver");}
+@section Scripts
+{
+    @{Html.RegisterMvcPagerScriptResource();}
+    <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}

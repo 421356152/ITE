@@ -1,0 +1,44 @@
+﻿@using Model
+@model List<ViewLeaveManagement>
+
+<table class="table table-hover table-striped table-bordered">
+    <tr>
+        <th>请假单号</th>
+        <th>请假人</th>
+        <th>所在班级</th>
+        <th>请假时间</th>
+        <th>请假天数</th>
+        <th>请假状态</th>
+        <th>请假类型</th>
+        <th>操作</th>
+    </tr>
+    @foreach(var leave in Model)
+    {
+        <tr>
+            <td>                
+                <a href="~/LeaveDetail/LeaveDetail">@leave.LeaveNo</a>
+            </td>
+            <td>
+                @leave.UserAccount
+            </td>
+            <td>
+                @leave.ClassName
+            </td>
+            <td>
+                @leave.StartDateTime-@leave.EndDateTime
+            </td>
+            <td>
+                @leave.LeaveDays
+            </td>
+            <td>
+                @leave.CodeDescription
+            </td>
+            <td>
+                @leave.LeaveCategory
+            </td>
+            <td id="operate" >
+                <input id="btnDelete" type="button" value="撤销" />
+            </td>
+        </tr>
+    }
+</table>

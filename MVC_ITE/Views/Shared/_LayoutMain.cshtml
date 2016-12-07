@@ -819,5 +819,8 @@
             <script src="/assets/js/ace.min.js"></script>
         </div>
     </form>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

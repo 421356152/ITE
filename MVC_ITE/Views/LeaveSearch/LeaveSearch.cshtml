@@ -1,0 +1,62 @@
+﻿
+@using Model
+@model List<ViewLeaveManagement>
+
+@{
+    ViewBag.Title = "LeaveSearch";
+    Layout = "~/Views/Shared/_LayoutMain.cshtml";
+}
+
+<h2>请假查询</h2>
+@using (@Html.BeginForm("Search", "LeaveSearch", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <td>请假类型</td>
+            <td>
+                <input type="checkbox" id="chkOrdinaryLeave" value="OrdinaryLeave" />普通请假
+                <input type="checkbox" id="chkEmergencyLeave" value="EmergencyLeave" />紧急请假
+            </td>
+        </tr>
+        <tr>
+            <td>用户账号</td>
+            <td>
+                <input type="text" id="txtUserAccount" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>请假状态</td>
+            <td>
+                @Html.DropDownList("ddlLeaveStatus",ViewData["LeaveStatusList"] as SelectList, new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <td>班级</td>
+            <td>
+                @Html.DropDownList("ddlClass", ViewData["ClassList"] as SelectList, new { @class = "form-control" })
+            </td>
+        </tr>
+        <tr>
+            <td>请假日期</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>请假天数</td>
+            <td>
+                <input id="txtLeaveDays" type="number" class="form-control" />
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input id="btnSearch" type="submit" value="查询" />
+            </td>
+        </tr>
+    </table>
+}
+
+<hr />
+
+<div class="divMainList">
+    @{ Html.RenderPartial("SearchControl/_PartialLeaveList", Model);}    
+</div>
+
