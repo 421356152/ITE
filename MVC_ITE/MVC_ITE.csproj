@@ -396,6 +396,7 @@
     <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeaveManagement.cshtml" />
     <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeavePage.cshtml" />
     <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeaveManagementOver.cshtml" />
+	 <Content Include="Views\LeaveManagement\LeaveManagements\_PartialLeavePageOver.cshtml" />
     <Content Include="Views\LeaveSearch\LeaveSearch.cshtml" />
     <Content Include="Views\LeaveSearch\SearchControl\_PartialLeaveList.cshtml" />
   </ItemGroup>

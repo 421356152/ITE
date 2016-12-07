@@ -11,7 +11,7 @@ namespace MVC_ITE.Controllers
     public class LeaveSearchController : Controller
     {
         ClassService classService = new ClassService();
-        //SystemCode systemSer
+        SystemCodeService systemCodeService = new SystemCodeService();
         // GET: LeaveSearch
         public ActionResult LeaveSearch()
         {

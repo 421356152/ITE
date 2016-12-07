@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassService.cs" />
+    <Compile Include="LeaveSearchService.cs" />
     <Compile Include="SystemCodeService.cs" />
     <Compile Include="UserInfoService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

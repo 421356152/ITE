@@ -19,26 +19,52 @@ namespace BLL
         /// 获取主页未审批的请假单信息
         /// </summary>
         /// <returns></returns>
-        public IPagedList<ViewLeaveManagement> ViewLeaveList(int pageIndex,int pageSize)
+        public IPagedList<ViewLeaveManagement> ViewLeaveList(int pageIndex, int pageSize,int roleId)
         {
-            var list = dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId == 6).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex,pageSize);
-            ViewLeaveManagement temp =new ViewLeaveManagement() ;
-            for (int i = 0; i < list.Count; ++i)
+            var mm = dbFactory.ViewLeaveManagementDbFactory.FirstOrDefault(a=>a.UserName=="李四");
+            if (mm.Tutor == null)
             {
-                for (int j = 0; j < list.Count - i - 1; ++j)
+                var list = dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId == 6 && a.RoleId == roleId).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize);
+                ViewLeaveManagement temp = new ViewLeaveManagement();
+                for (int i = 0; i < list.Count; ++i)
                 {
-                    if (list[j].StartDateTime == list[j + 1].StartDateTime)
+                    for (int j = 0; j < list.Count - i - 1; ++j)
                     {
-                        if (list[j+1].LeaveCategory == "紧急请假")
+                        if (list[j].StartDateTime == list[j + 1].StartDateTime)
                         {
-                            temp = list[j];
-                            list[j] = list[j + 1];
-                            list[j + 1] = temp;
+                            if (list[j + 1].LeaveCategory == "紧急请假")
+                            {
+                                temp = list[j];
+                                list[j] = list[j + 1];
+                                list[j + 1] = temp;
+                            }
                         }
                     }
                 }
+                return list;
             }
-            return list;
+            else
+            {
+                var list = dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId == 6 && a.RoleId == roleId|| a.LeaveStatusId == 8 && a.RoleId == roleId).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize);
+                ViewLeaveManagement temp = new ViewLeaveManagement();
+                for (int i = 0; i < list.Count; ++i)
+                {
+                    for (int j = 0; j < list.Count - i - 1; ++j)
+                    {
+                        if (list[j].StartDateTime == list[j + 1].StartDateTime)
+                        {
+                            if (list[j + 1].LeaveCategory == "紧急请假")
+                            {
+                                temp = list[j];
+                                list[j] = list[j + 1];
+                                list[j + 1] = temp;
+                            }
+                        }
+                    }
+                }
+                return list;
+            }
+           
             
 
         }
@@ -46,14 +72,26 @@ namespace BLL
         /// 获取主页已审批的请假单信息
         /// </summary>
         /// <returns></returns>
-        public List<ViewLeaveManagement> OverViewLeaveList()
+        public IPagedList<ViewLeaveManagement> OverViewLeaveList(int pageIndex, int pageSize, int roleId)
         {
-            return dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId != 6).OrderByDescending(a => a.StartDateTime).ToList();
+            var mm = dbFactory.ViewLeaveManagementDbFactory.FirstOrDefault(a => a.UserName == "李四");
+            if (mm.Tutor == null)
+            {
+                return dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId != 6 && a.RoleId == 1).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize);
+            }
+            else { return dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId != 6 && a.RoleId == 1|| a.LeaveStatusId != 8 && a.RoleId == 1).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize); }
         }
-
-        public List<ViewLeaveManagement> GetLeaveSearch()
+        /// <summary>
+        /// 撤销请假单
+        /// </summary>
+        /// <param name="id">请假单ID</param>
+        /// <returns></returns>
+        public bool LeaveDel(int id)
         {
-            return dbFactory.ViewLeaveManagementDbFactory.ToList();
+            var dmess = dbFactory.ViewLeaveManagementDbFactory;
+            var mess = dbFactory.ViewLeaveManagementDbFactory.FirstOrDefault(a => a.LeaveStatusId == id);
+            if (mess != null) {dmess.Remove(mess); return true; } else { return false; }
+                
         }
     }
 }
