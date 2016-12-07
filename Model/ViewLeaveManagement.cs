@@ -14,7 +14,7 @@ namespace Model
     {
         [Key]
         /// <summary>
-        /// 主键2
+        /// 主键1
         /// </summary>
         public Guid Id { get; set; }
         /// <summary>
