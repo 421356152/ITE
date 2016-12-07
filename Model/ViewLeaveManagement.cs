@@ -14,7 +14,7 @@ namespace Model
     {
         [Key]
         /// <summary>
-        /// 主键
+        /// 主键1
         /// </summary>
         public Guid Id { get; set; }
         /// <summary>
@@ -64,7 +64,7 @@ namespace Model
         /// <summary>
         /// 角色
         /// </summary>
-        public string role{ get; set; }
+        public string Role{ get; set; }
         /// <summary>
         /// 请假单状态
         /// </summary>
