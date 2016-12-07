@@ -21,8 +21,20 @@ namespace BLL
         /// <returns></returns>
         public IPagedList<ViewLeaveManagement> ViewLeaveList(int pageIndex, int pageSize,int roleId)
         {
-            var mm = dbFactory.ViewLeaveManagementDbFactory.FirstOrDefault(a=>a.UserName=="李四");
-            if (mm.Tutor == null)
+            if (roleId == 1)
+            {
+                return StuLeave(pageIndex, pageSize, roleId);
+            }
+            else
+            {
+                return TheahLeave(pageIndex, pageSize, roleId);
+            }
+            
+         }
+        public IPagedList<ViewLeaveManagement> StuLeave(int pageIndex, int pageSize,int roleId)
+        {
+            var mm = dbFactory.ViewLeaveManagementDbFactory.FirstOrDefault(a => a.UserName == "李四");
+            if (mm.Tutor == null)//非实训班
             {
                 var list = dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId == 6 && a.RoleId == roleId).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize);
                 ViewLeaveManagement temp = new ViewLeaveManagement();
@@ -43,9 +55,9 @@ namespace BLL
                 }
                 return list;
             }
-            else
+            else//实训班
             {
-                var list = dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId == 6 && a.RoleId == roleId|| a.LeaveStatusId == 8 && a.RoleId == roleId).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize);
+                var list = dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId == 6 && a.RoleId == roleId || a.LeaveStatusId == 8 && a.RoleId == roleId).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize);
                 ViewLeaveManagement temp = new ViewLeaveManagement();
                 for (int i = 0; i < list.Count; ++i)
                 {
@@ -64,10 +76,8 @@ namespace BLL
                 }
                 return list;
             }
-           
-            
-
         }
+        public 
         /// <summary>
         /// 获取主页已审批的请假单信息
         /// </summary>
@@ -79,7 +89,7 @@ namespace BLL
             {
                 return dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId != 6 && a.RoleId == 1).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize);
             }
-            else { return dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId != 6 && a.RoleId == 1|| a.LeaveStatusId != 8 && a.RoleId == 1).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize); }
+            else { return dbFactory.ViewLeaveManagementDbFactory.Where(a => a.LeaveStatusId != 6 && a.RoleId == 1&& a.LeaveStatusId != 8 ).OrderByDescending(a => a.StartDateTime).ToPagedList(pageIndex, pageSize); }
         }
         /// <summary>
         /// 撤销请假单
