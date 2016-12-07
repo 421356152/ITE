@@ -10,11 +10,11 @@
     @{Html.RenderPartial("LeaveManagements/_PartialLeavePage", Model);}
 </div>
 <div id="tt">
-    <hr />
+<hr />
     @{Html.RenderPartial("LeaveManagements/_PartialLeavePageOver", ViewData["overList"]);}
 </div>
 @section Scripts
-{
+    {
     @{Html.RegisterMvcPagerScriptResource();}
     <script type="text/javascript" src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
-}
+    }

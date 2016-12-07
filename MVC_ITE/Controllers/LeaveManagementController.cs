@@ -52,10 +52,12 @@ namespace MVC_ITE.Controllers
         {
             bool result = viewleavelist.LeaveDel(id);
             if (result)
-            {
+        {
                 return Json("成功");
             }
             else { return Json("失败");}
         }
-    }
+        
+
+	}
 }
